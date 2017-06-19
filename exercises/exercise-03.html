@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script>
+	function groceryItems() {
+  		// Implement the function here.		
+		for (i = 0; i < arguments.length; i++) {			
+			var arg = arguments[i];
+			
+			if($("[data-species=" + arg + "]").length){
+				var stock = $("[data-species=" + arg + "]").text();
+				console.log('Stock for ' + arg + ' is ' + stock);
+				continue;
+			};
+			
+			if($("[data-continent=" + arg + "]").length){
+				//select only valid items
+				var items = $("[data-continent=" + arg + "]").children("[data-species]");	
+				if(items.length) {
+					//loop over them and display quantity and item name
+					for (j = 0; j < items.length; j++) {
+						console.log('Stock for ' + $(items[j]).attr('data-species') + ' is ' + $(items[j]).text());
+					}
+				}else {
+					console.log('Category ' + arg + ' does not contain any items');
+				}				
+				continue;
+			};
+			
+			console.log('Could not find the item or category named as ' + arg);
+		}
+	}
+	
+	$(document).ready(function() {
+		groceryItems('Pulses', 'Vegetables');
+	});
+	</script>
+</head>
+<body>
+<p>We have list of grocery items on sale in a shop</p>
+
+<p>Write a function that returns how much of grocery is remaining in stock. For example groceryItems('Rice') would return 'Nearly Emptied'.</p>
+
+<div>
+    <ul data-continent="Pulses">
+        <li data-species="Dal">Very Low</li>
+        <li data-species="Rice">Nearly Emptied</li>
+		<li data-species="Wheat">Full</li>
+		<li>Half Empty</li>
+    </ul>
+    <ul data-continent="Spices">
+        <li data-species="Turmeric">Empty</li>
+    </ul>
+	<ul data-continent="Vegetables">        
+    </ul>
+</div>
+	
+</body>
+</html>

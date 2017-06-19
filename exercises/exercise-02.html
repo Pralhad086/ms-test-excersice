@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Change request</title>
+	<script>
+		function usableDate(calendarDate) {
+			var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(calendarDate);
+			if (matches == null) return "date format supplied is not in required format 'MM/DD/YYYY'";
+			var d = matches[1];
+			var m = matches[2]-1;
+			var y = matches[3];
+			var date = new Date(y, m, d);
+			
+			var yyyy = date.getFullYear();
+			var mm = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1); // getMonth() is zero-based
+			var dd  = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+			return "".concat(yyyy).concat(mm).concat(dd);			
+		}
+
+		console.log(usableDate("16/06/2016"));
+	</script>
+</head>
+<body>
+<p>For a certain calendar, due to certain changes in the project the required date is now in the format(YYYYMMDD) but unfortunately what we have been using is the format M/D/YYYY. How can you help? Can you write the code for this change of request? Please also demo.</p>
+</body>
+</html>
