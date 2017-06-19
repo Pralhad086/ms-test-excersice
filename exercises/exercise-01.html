@@ -7,11 +7,13 @@
 	function interactionHandle() {
 	  var onlineShop = document.getElementsByTagName('a');
 	  for (var i = 0; i < onlineShop.length; i++) {
-		onlineShop[i].index = i+1;
-	    onlineShop[i].onclick = function() {		  
-	      alert(this.index);		  		  
-	      return false;
-	    }
+		
+		(function(index){
+			onlineShop[i].addEventListener("click", function(e) {
+				e.preventDefault();
+				alert(index);				
+			});		  		  	      
+		})(i);		
 	  }
 	}
 
